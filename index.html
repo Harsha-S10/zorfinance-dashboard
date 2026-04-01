@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZorFinance</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <div>
+        <h1>ZorFinance</h1>
+        <p id="pageLabel">Overview</p>
+      </div>
+
+      <div class="header-tools">
+        <label for="role">Role:</label>
+        <select id="role">
+          <option value="viewer">Viewer</option>
+          <option value="admin">Admin</option>
+        </select>
+        <button id="themeBtn">Dark</button>
+      </div>
+    </header>
+
+    <nav class="tabs">
+      <button class="tab active" data-page="overview">Overview</button>
+      <button class="tab" data-page="transactions">Transactions</button>
+      <button class="tab" data-page="insights">Insights</button>
+    </nav>
+
+    <section id="overview" class="page active">
+      <div id="summary" class="summary"></div>
+
+      <div class="two-col">
+        <div class="card">
+          <h3>Balance Trend</h3>
+          <canvas id="trendChart"></canvas>
+        </div>
+        <div class="card">
+          <h3>Spending by Category</h3>
+          <canvas id="categoryChart"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <section id="transactions" class="page">
+      <div class="card">
+        <div class="filters">
+          <input id="search" type="text" placeholder="Search description/category">
+          <select id="filterType">
+            <option value="all">All</option>
+            <option value="income">Income</option>
+            <option value="expense">Expense</option>
+          </select>
+          <select id="sortBy">
+            <option value="date">Date</option>
+            <option value="amount">Amount</option>
+            <option value="category">Category</option>
+          </select>
+          <button id="sortDir">Desc</button>
+          <button id="toggleForm">+ Add</button>
+        </div>
+
+        <form id="addForm" class="add-form hidden">
+          <input id="fDate" type="date" required>
+          <input id="fDesc" type="text" placeholder="Description" required>
+          <input id="fAmount" type="number" min="1" required>
+          <select id="fCategory" required>
+            <option>Food</option>
+            <option>Rent</option>
+            <option>Transport</option>
+            <option>Shopping</option>
+            <option>Utilities</option>
+            <option>Salary</option>
+            <option>Freelance</option>
+            <option>Other</option>
+          </select>
+          <select id="fType" required>
+            <option value="expense">Expense</option>
+            <option value="income">Income</option>
+          </select>
+          <button type="submit">Save</button>
+        </form>
+      </div>
+
+      <div class="card">
+        <div class="table-area">
+          <table>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Description</th>
+                <th>Category</th>
+                <th>Type</th>
+                <th>Amount</th>
+                <th>Edit</th>
+              </tr>
+            </thead>
+            <tbody id="rows"></tbody>
+          </table>
+        </div>
+        <p id="noData" class="hidden">No transactions found.</p>
+      </div>
+    </section>
+
+    <section id="insights" class="page">
+      <div id="insightList" class="summary"></div>
+      <div class="card">
+        <h3>Monthly Income vs Expense</h3>
+        <canvas id="monthlyChart"></canvas>
+      </div>
+    </section>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
